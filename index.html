@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Crystal Game</title>
+ 
+<!-- reset -->
+	<!-- <link rel="stylesheet" type="text/css" href="assets/reset.css"> -->
+<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<!-- bootstrap overrides -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<!-- //bring in fonts  -->
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Overpass" rel="stylesheet">
+<!-- Added link to the jQuery Library -->
+	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-header">
+          <h1> Crystal Game </h1>
+        </div>
+        <div class="row">
+	          <div class="col-md-6">
+	            <p>
+				You will be given a random number at the start of the game.
+				</p>
+				<p>
+				There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score.
+				</p>
+				<p>
+				You win the game by matching your total score to random number, you lose the game if your total score goes above the random number.
+				</p>
+				<p>
+				the value of each crystal is hidden from you until you click on it. 
+				</p>
+				<p>
+				Each time when the game starts, the game will change the values of each crystal.            
+				</p>
+	          </div>
+	        </div>
+	    <div class= "row">
+	        <div class="col-md-6">
+	          	<div class="col-md-5">
+		          	<span class="glyphicon glyphicon-screenshot" aria-hidden="true">
+		          	</span>
+		          	<h4 id=Randomtext>
+			          		Random number = 
+		          	</h4>
+	          	</div>
+	    	</div>
+	        <div class="col-md-2">
+	          	<div class="col-md-5">
+		          	<span class="glyphicon glyphicon-screenshot" aria-hidden="true">
+		          	</span>
+		          	<h4 id=winstext>
+			          		Wins:
+		          	</h4>
+		          	<h4 id=lossestext>
+			          		Losses:
+		          	</h4>
+	          	</div>
+	    	</div> 
+		</div> 
+
+	   	  <div class= "row">
+	        <div class="col-md-12">
+	          	<div class="col-md-2">
+					<input type="image" id="button-1" src="assets/images/crystal1.png" alt="Crystal1" class="img-thumbnail" width="100" height="100">
+	          	</div>
+	          	<div class="col-md-2">
+					<input type="image" id="button-2" src="assets/images/crystal2.png" alt="Crystal2" class="img-thumbnail" width="100" height="100">
+	          	</div>
+	          	<div class="col-md-2">
+					<input type="image" id="button-3" src="assets/images/crystal3.png" alt="Crystal3" class="img-thumbnail" width="100" height="100">
+	          	</div>
+	          	<div class="col-md-2">
+					<input type="image" id="button-4" src="assets/images/crystal4.png" alt="Crystal4" class="img-thumbnail" width="100" height="100">
+	          	</div>
+
+	    	</div> 
+	   	  </div> 
+	   	  <div class= "row">
+	        <div class="col-md-6">
+	          	<div class="col-md-5">
+		          	<h4 id=letterlengthid>
+		          	Your total score is:
+		          	</h4>
+	          	</div>
+	    	</div> 
+	   	  </div> 
+	   	  <div class= "row">
+	        <div class="col-md-6">
+	          	<div class="col-md-5">
+		          	<h4 id=scoretext>
+			          		score
+		          	</h4>
+	          	</div>
+	    	</div> 
+	   	  </div> 
+
+
+
+
+      	</div>
+	  </div> 
+	</div> 
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+// Variables*******************************************
+ 
+var randomnumber = Math.floor((Math.random() * 120) + 20);
+var crystal1 = Math.floor((Math.random() * 10) + 2);
+var crystal2 = Math.floor((Math.random() * 10) + 2);
+var crystal3 = Math.floor((Math.random() * 10) + 2);
+var crystal4 = Math.floor((Math.random() * 10) + 2);
+var totalscore = 0;
+var wins = 0;
+var losses = 0;
+var newscore = 0;
+
+// $(document).click(function() {
+// console.log("click");
+// console.log(crystal1);
+// console.log(crystal2);
+// console.log(crystal3);
+// console.log(crystal4);
+// });
+
+///////////FUNCTIONS////////////////////
+
+function reset() {
+	randomnumber = Math.floor((Math.random() * 120) + 20);
+	crystal1 = Math.floor((Math.random() * 10) + 2);
+	crystal2 = Math.floor((Math.random() * 10) + 2);
+	crystal3 = Math.floor((Math.random() * 10) + 2);
+	crystal4 = Math.floor((Math.random() * 10) + 2);
+	totalscore = 0;
+	$("#Randomtext").html("Random number: "+randomnumber);
+}
+
+function loserloser() {
+	alert("You lose!");
+	losses++;
+	$("#lossestext").html("Losses: "+losses);
+	reset();
+}
+
+function winnerwinner() {
+	alert("You Win!!");
+	wins++;
+	$("#winstext").html("Wins: "+wins);
+	reset();
+}
+
+var scores = {
+crystal1fun: function() {
+	console.log(crystal1);
+	totalscore=crystal1+totalscore;
+	$("#scoretext").html(totalscore);
+	if (totalscore == randomnumber) {
+		winnerwinner();
+	}
+	else if (totalscore>randomnumber){
+		loserloser();
+		}
+	},
+crystal2fun: function() {
+	console.log(crystal2);
+	totalscore=crystal2+totalscore;
+	$("#scoretext").html(totalscore);
+	if (totalscore == randomnumber) {
+		winnerwinner();
+	}
+	else if (totalscore>randomnumber){
+		loserloser();
+		}
+	},
+crystal3fun: function() {
+	console.log(crystal3);
+	totalscore=crystal3+totalscore;
+	$("#scoretext").html(totalscore);
+	if (totalscore == randomnumber) {
+		winnerwinner();
+	}
+	else if (totalscore>randomnumber){
+		loserloser();
+		}
+	},
+crystal4fun: function() {
+	console.log(crystal4);
+	totalscore=crystal4+totalscore;
+	$("#scoretext").html(totalscore);
+	if (totalscore == randomnumber) {
+		winnerwinner();
+	}
+	else if (totalscore>randomnumber){
+		loserloser();
+	}
+	}
+}
+
+
+//////////Jqueriessss/////////////////////////////
+  $("#button-1").click(scores.crystal1fun) ;
+  $("#button-2").click(scores.crystal2fun);
+  $("#button-3").click(scores.crystal3fun);
+  $("#button-4").click(scores.crystal4fun);
+	
+$("#Randomtext").html("Random number: "+randomnumber);
+$("#scoretext").html(totalscore);
+$("#lossestext").html("Losses: "+losses);
+$("#winstext").html("Wins: "+wins);
+
+
+
+ // $("#button-1").click(play('assets/images/sound.mp3'))
+
+});
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
